@@ -5,13 +5,11 @@ testrunner.options.log.summary = false;
 testrunner.options.log.globalSummary = false;
 testrunner.options.log.assertions = false;
 
-/* testrunner.run({
+testrunner.run([{
     code: "Builder.js",
     tests: "BuilderTests.js"
-}); */
-
-testrunner.run({
+},{
     code: "Index.js",
     tests: "IndexTests.js"
-});
+}]);
 

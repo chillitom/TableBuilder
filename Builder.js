@@ -34,30 +34,26 @@ Builder = (function() {
 	}
 
 	Builder.prototype.get = function(key) {
-		var obj = objectFromPath(this.stack);
+		var obj = valuesFromPath(this.stack);
 		return obj[key];
 	};
 
-	function walkTree(node, path, leafFunc) {
+	function flattenTree(node, path, rows) {
 		path.push(node);
 
 		if(node.children.length > 0) {
 			for(var n = 0; n < node.children.length; n++) {
-			//	console.log("child " + n)
-				walkTree(node.children[n], path, leafFunc);
+				flattenTree(node.children[n], path, rows);
 			}
-			//node.children.forEach(function (child) {
-			//	walkTree(child, path, leafFunc);
-			//});
 		}
 		else {
-			leafFunc(path);
+			rows.push(valuesFromPath(path));
 		}
 
 		path.pop();
 	}
 
-	function objectFromPath(path) {
+	function valuesFromPath(path) {
 		var obj = {};
 
 		for(var p = 0; p < path.length; p++) {
@@ -75,10 +71,7 @@ Builder = (function() {
 	{
 		var rows = [];
 
-		walkTree(this.root, [], function(path) {
-			var row = objectFromPath(path);
-			rows.push(row);
-		});
+		flattenTree(this.root, [], rows);
 
 		return rows;
 	};

@@ -17,9 +17,7 @@ test("build a big index", function() {
 
 	}
 
-	console.time("index")
 	var index = new Index(rows, ["a"]);
-	console.timeEnd("index");
 
 	ok(true)
 });

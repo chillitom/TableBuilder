@@ -1,4 +1,4 @@
-/*
+
 test("add an item", function() {
 	var b = new Builder();
 	b.add("league", "Premiership");
@@ -36,11 +36,8 @@ test("get a value added by a previous level", function() {
 	b.push();
 
 	ok(b.get("league") == "Premiership");
-}); */
+});
 test("the full deal", function() {
-	console.log();
-	console.time("building tree")
-
 	var builder = new Builder();
 
 	builder.add("top", 123);
@@ -68,16 +65,8 @@ test("the full deal", function() {
 		builder.pop();
 	}
 
-	console.timeEnd("building tree");
-
-	console.time("buildRows");
-
 	var rows = builder.buildRows();
 
-	console.timeEnd("buildRows");
-
-	//console.log(JSON.stringify(builder.root, null, '  '));
-	//console.dir(rows);
 	equal(rows.length, 1000, "should have one row per leaf");
 });
 
